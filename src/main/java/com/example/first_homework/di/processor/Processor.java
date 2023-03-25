@@ -16,7 +16,7 @@ public class Processor {
     String name;
 
     @PostConstruct
-    public void postConstruct() {
+    private void postConstruct() {
         System.out.printf("A processor №%s has been created\n", this.hashCode());
     }
 }

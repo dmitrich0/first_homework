@@ -10,11 +10,11 @@ import javax.annotation.PreDestroy;
 
 @Component
 public class Laptop implements Computer {
-    boolean isStarted = false;
+    private boolean isStarted = false;
     private Notifier notifier;
 
     @Autowired
-    Processor processor;
+    private Processor processor;
 
     @Autowired
     public void setNotifier(Notifier notifier) {
@@ -40,12 +40,12 @@ public class Laptop implements Computer {
     }
 
     @PostConstruct
-    public void postConstruct() {
+    private void postConstruct() {
         System.out.println("✔ A laptop has been created");
     }
 
     @PreDestroy
-    public void preDestroy() {
+    private void preDestroy() {
         System.out.println("✖ A laptop has been destroyed");
     }
 }
