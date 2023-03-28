@@ -9,7 +9,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
 
 @RestControllerAdvice
-public class PasswordAdvice {
+public class ConstraintAdvice {
     @ExceptionHandler({ConstraintViolationException.class})
     public ResponseEntity<?> handleNotValid(ConstraintViolationException ex) {
         var errors = ex.getConstraintViolations();

@@ -3,7 +3,7 @@ package PasswordValidator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class PhoneValidator implements ConstraintValidator<PasswordConstraint, String> {
+public class PasswordValidator implements ConstraintValidator<PasswordConstraint, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
