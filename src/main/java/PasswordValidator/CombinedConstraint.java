@@ -5,14 +5,14 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Email;
 import java.lang.annotation.*;
 
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {})
 @Length(min = 8, max = 16)
-@Pattern(regexp = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
+@Email
 @Documented
 @ReportAsSingleViolation
 public @interface CombinedConstraint {
