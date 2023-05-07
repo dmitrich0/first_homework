@@ -6,12 +6,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +19,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(inMemoryUserDetailsManager());
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().fullyAuthenticated().and().httpBasic().and().csrf().disable();
-    }
+public class WebSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -46,6 +36,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         userDetailsList.add(User.withUsername("support").password(passwordEncoder().encode("support"))
                 .roles("SUPPORT").build());
         return new InMemoryUserDetailsManager(userDetailsList);
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .anyRequest()
+                .fullyAuthenticated()
+                .and()
+                .httpBasic()
+                .and()
+                .csrf().disable();
+        var auth = http.getSharedObject(AuthenticationManagerBuilder.class);
+        auth.userDetailsService(inMemoryUserDetailsManager());
+        return http.build();
     }
 
 }
