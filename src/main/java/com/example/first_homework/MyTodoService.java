@@ -14,7 +14,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MyTodoService {
 
-    MyTodoRepository myTodoRepository;
+    private MyTodoRepository myTodoRepository;
 
     public MyTodo createTodo(MyTodoDTO dto) {
         var todo = MyTodo.builder()

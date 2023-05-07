@@ -15,12 +15,12 @@ import javax.persistence.*;
 public class MyTodo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Version
-    Long version;
+    private Long version;
 
-    String name;
+    private String name;
 
-    String[] events;
+    private String[] events;
 }

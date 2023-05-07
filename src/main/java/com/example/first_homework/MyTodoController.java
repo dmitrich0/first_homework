@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MyTodoController {
-    MyTodoService todoService;
+    private MyTodoService todoService;
 
     @PostMapping()
     public MyTodo createTodo(@RequestBody MyTodoDTO dto) {
