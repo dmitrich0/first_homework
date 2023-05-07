@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 @RequestMapping("/event")
 public class EventController {
     @Autowired
-    ApplicationEventPublisher applicationEventPublisher;
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @GetMapping("/common")
     public String generateCommonEvent() {
@@ -33,11 +33,21 @@ public class EventController {
 
     @GetMapping("/transactional")
     @Transactional
-    public String generateTransactionalEventTrue() {
-        var event = new TransactionalEvent(true);
+    public String generateTransactionalEvent() throws Exception {
+        var event = new TransactionalEvent(1917);
         applicationEventPublisher.publishEvent(event);
-        var event2 = new TransactionalEvent(false);
-        applicationEventPublisher.publishEvent(event2);
         return "Transactional event";
+    }
+
+    @GetMapping("/transactionalError")
+    @Transactional
+    public String generateTransactionalErrorEvent() {
+        try {
+            var event = new TransactionalEvent(-150);
+            applicationEventPublisher.publishEvent(event);
+            return "Transactional event";
+        } catch (Exception ex) {
+            return "Transactional event with error";
+        }
     }
 }
