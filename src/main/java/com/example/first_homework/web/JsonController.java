@@ -13,10 +13,11 @@ import java.util.Random;
 @RequestMapping(value = "/json")
 public class JsonController {
     @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JsonDTO> returnNewJson(@RequestBody JsonDTO request) {
+    public ResponseEntity<OutputJsonDTO> returnNewJson(@RequestBody InputJsonDTO request) {
         Random rand = new Random();
         request.info.id = rand.nextInt();
-        return new ResponseEntity<>(request, HttpStatus.OK);
+        var response = new OutputJsonDTO(request.price, request.info);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping(value = "/getError")
