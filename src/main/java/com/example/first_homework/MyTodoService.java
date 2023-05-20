@@ -18,8 +18,8 @@ public class MyTodoService {
 
     public MyTodo createTodo(MyTodoDTO dto) {
         var todo = MyTodo.builder()
-                .name(dto.name)
-                .events(dto.events)
+                .name(dto.getName())
+                .events(dto.getEvents())
                 .build();
         return myTodoRepository.save(todo);
     }

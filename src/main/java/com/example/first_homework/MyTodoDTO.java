@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MyTodoDTO {
-    public String name;
-    public String[] events;
+    private String name;
+    private String[] events;
 }
