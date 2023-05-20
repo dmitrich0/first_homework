@@ -6,10 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Getter
 public class TransactionalEvent {
-    public TransactionalEvent(int year) throws Exception {
+    public TransactionalEvent() {
         log.info("Transactional event has been created");
-        if (year < 0 || year > 2023) {
-            throw new Exception();
-        }
+    }
+
+    public void makeError() throws Exception {
+        throw new Exception();
     }
 }
