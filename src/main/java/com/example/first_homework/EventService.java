@@ -37,8 +37,8 @@ public class EventService {
     public String generateTransactionalErrorEvent() {
         try {
             var event = new TransactionalEvent();
-            applicationEventPublisher.publishEvent(event);
             event.makeError();
+            applicationEventPublisher.publishEvent(event);
             return "Transactional event";
         } catch (Exception ex) {
             return "Transactional event with error";
