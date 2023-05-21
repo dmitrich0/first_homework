@@ -9,14 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Component
 @Aspect
 public class ApiAspect {
-    private final Map<String, Integer> apiCalls = new HashMap<>();
+    private final Map<String, Integer> apiCalls = new ConcurrentHashMap<>();
     @Autowired
     private ApiConfiguration apiConfiguration;
 
