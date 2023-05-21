@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping("/todo")
 @RequiredArgsConstructor
 public class MyTodoController {
-    private MyTodoService todoService;
+    private final MyTodoService todoService;
 
     @PostMapping()
     public MyTodo createTodo(@RequestBody MyTodoDTO dto) {
